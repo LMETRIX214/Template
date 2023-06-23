@@ -1,0 +1,401 @@
+<!--
+    @version 1.5.2
+    @author LMETRIX214 <https://linktr.ee/lmetrix214>
+    @exclusive use for COLEGIO LEONA VICARIO
+    @subject Computing
+    @date June 20, 2023
+    @description This page offers a design and code clean that can be used as a base for improving and customizing other web pages. With this template, students can save time by not having to start from scratch and focus on making modifications and adding functionality as needed.
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/avif" href="../imagenes/imagen.avif"> <!-- Icono de la página / Page icon -->
+    <title>Documento</title>
+    <style>
+        /* Colores que contiene la página / Colors contained in the page */
+        :root {
+            --color1: #f1f1f1;
+            --color2: #f9f9f9;
+            --color3: #ddd;
+            --color4: #333;
+            --color5: #00000033;
+        }
+
+        body {
+            background-color: var(--color2);
+            font-family: Arial;
+            font-size: 14px;
+        }
+
+        /* Personalización de barra de desplazamiento / Scroll bar customization */
+        ::-webkit-scrollbar {
+            background-color: var(--color2);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--color4);
+        }
+
+        /* Barra de navegación / Navigation bar */
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color1);
+        }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 15px;
+            text-decoration: none;
+            color: var(--color4);
+        }
+
+        nav ul li a:hover {
+            background-color: var(--color3);
+        }
+
+        .desplegable:hover .contenido-desplegable {
+            display: block;
+        }
+
+        .contenido-desplegable {
+            display: none;
+            position: absolute;
+            background-color: var(--color2);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px var(--color5);
+        }
+
+        .contenido-desplegable a {
+            display: block;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: var(--color4);
+        }
+
+        .contenido-desplegable a:hover {
+            background-color: var(--color3);
+        }
+
+        .contenido-desplegable[multiple] {
+            height: auto;
+            overflow: auto;
+        }
+
+        /* Línea divisoria / Dividing line */
+        hr {
+            width: 20%;
+            background-color: #333;
+        }
+
+        /* Encabezado / Header */
+        h1 {
+            text-align: center;
+        }
+
+        /* Imagen izquierda / Left image */
+        .contenido1 {
+            display: flex;
+            align-items: center;
+            text-align: justify;
+        }
+
+        .imagen1 {
+            height: 20%;
+            width: 20%;
+            margin-right: 30px;
+        }
+
+        /* Imagen derecha / Right image */
+        .contenido2 {
+            display: flex;
+            align-items: center;
+            text-align: justify;
+        }
+
+        .imagen2 {
+            height: 20%;
+            width: 20%;
+            margin-left: 30px;
+        }
+
+        /* Múltiples imágenes / Multiple images */
+        .multi {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .multi-imagen {
+            flex: 0 0 33.33%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .multi-imagen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .multi-imagen.activa {
+            opacity: 1;
+        }
+
+        /* Múltiples imágenes con texto / Multiple images with text */
+        .multi-texto {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .multi-imagen-texto {
+            position: relative;
+            margin: 10px;
+        }
+
+        .imagen-texto {
+            position: absolute;
+            top: 90%;
+            left: 10px;
+            background-color: var(--color5);
+            color: var(--color1);
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        .multi-imagen-texto img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Video / Video */
+        .video {
+            position: relative;
+        }
+
+        .video .texto {
+            height: 20%;
+            margin-left: 30px;
+        }
+
+        .video video {
+            width: 40%;
+            height: auto;
+        }
+
+        /* Archivo PDF / PDF file */
+        .archivos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .pdf-contenido {
+            width: 600px;
+            height: 80%;
+            border: 1px solid var(--color4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pdf-contenido object {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Flecha para ir al inicio de la página / Arrow to go to the top of the page */
+        #flecha-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--color4);
+            color: var(--color1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            font-family: Arial;
+            font-size: 14px;
+        }
+
+        #flecha-top.mostrar {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Barra de navegación / Navigation bar -->
+    <nav>
+        <ul>
+            <li><a href="#enlace0">Enlace 0</a></li>
+            <li><a href="#enlace1">Enlace 1</a></li>
+            <li class="desplegable">
+                <a href="#">Selección</a>
+                <ul class="contenido-desplegable" multiple>
+                    <a href="#">Subenlace 1</a>
+                    <a href="#">Subenlace 2</a>
+                    <a href="#">Subenlace 3</a>
+                    <a href="#">Subenlace 4</a>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Imagen izquierda / Left image -->
+    <div class="inicio" id="enlace0">
+        <h1>Enlace 0</h1>
+        <div class="contenido1">
+            <img class="imagen1" src="../imagenes/imagen.avif">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Sed turpis tincidunt id aliquet risus. Consectetur lorem donec massa sapien.
+                Consequat nisl vel pretium lectus. Dictumst quisque sagittis purus sit amet volutpat consequat. Posuere
+                sollicitudin aliquam ultrices sagittis. Quis lectus nulla at volutpat diam ut venenatis. Quam adipiscing
+                vitae proin sagittis. Mollis aliquam ut porttitor leo. Enim nunc faucibus a pellentesque sit. Sed
+                blandit libero volutpat sed cras ornare arcu. Orci sagittis eu volutpat odio facilisis.
+            </p>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+
+    <!-- Imagen derecha / Right image -->
+    <div class="desarrollo1" id="enlace1">
+        <h1>Enlace 1</h1>
+        <div class="contenido2">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Sed turpis tincidunt id aliquet risus. Consectetur lorem donec massa sapien.
+                Consequat nisl vel pretium lectus. Dictumst quisque sagittis purus sit amet volutpat consequat. Posuere
+                sollicitudin aliquam ultrices sagittis. Quis lectus nulla at volutpat diam ut venenatis. Quam adipiscing
+                vitae proin sagittis. Mollis aliquam ut porttitor leo. Enim nunc faucibus a pellentesque sit. Sed
+                blandit libero volutpat sed cras ornare arcu. Orci sagittis eu volutpat odio facilisis.
+            </p>
+            <img class="imagen2" src="../imagenes/imagen.avif">
+        </div>
+    </div>
+
+
+    <br>
+    <hr>
+
+    <!-- Múltiples imágenes / Multiple images -->
+    <h1>Múltiples imágenes</h1>
+    <div class="multi">
+        <div class="multi-imagen activa">
+            <img src="../imagenes/imagen.avif" alt="Imagen 1">
+        </div>
+        <div class="multi-imagen activa">
+            <img src="../imagenes/imagen.avif" alt="Imagen 2">
+        </div>
+        <div class="multi-imagen activa">
+            <img src="../imagenes/imagen.avif" alt="Imagen 3">
+        </div>
+    </div>
+
+    <br>
+    <hr>
+
+    <!-- Múltiples imágenes con texto / Multiple images with text -->
+    <h1>Múltiples imágenes con texto</h1>
+    <div class="multi-texto">
+        <div class="multi-imagen-texto">
+            <span class="imagen-texto">Texto de la imagen 1</span>
+            <img src="../imagenes/imagen.avif" alt="Imagen 1">
+        </div>
+        <div class="multi-imagen-texto">
+            <span class="imagen-texto">Texto de la imagen 2</span>
+            <img src="../imagenes/imagen.avif" alt="Imagen 2">
+        </div>
+        <div class="multi-imagen-texto">
+            <img src="../imagenes/imagen.avif" alt="Imagen 3">
+            <span class="imagen-texto">Texto de la imagen 3</span>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+
+    <!-- Video / Video -->
+    <h1>Video</h1>
+    <div class="video">
+        <div class="contenido1">
+            <video controls loop>
+                <source src="../videos/video.webm" type="video/webm">
+                <p>El navegador no puede mostrar el video.
+                    <a href="../videos/video.webm">Haz clic aquí para descargarlo.</a>
+                </p>
+            </video>
+            <p class="texto">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Sed turpis tincidunt id aliquet risus. Consectetur lorem donec massa sapien.
+                Consequat nisl vel pretium lectus. Dictumst quisque sagittis purus sit amet volutpat consequat. Posuere
+                sollicitudin aliquam ultrices sagittis. Quis lectus nulla at volutpat diam ut venenatis. Quam adipiscing
+                vitae proin sagittis. Mollis aliquam ut porttitor leo. Enim nunc faucibus a pellentesque sit. Sed
+                blandit libero volutpat sed cras ornare arcu. Orci sagittis eu volutpat odio facilisis.
+            </p>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+
+    <!-- Archivo PDF / PDF file-->
+    <h1>Archivo PDF</h1>
+    <div class="archivos">
+        <div class="pdf-contenido">
+            <object data="../documentos/documento.pdf" type="application/pdf">
+                <p>El navegador no puede mostrar el PDF.
+                    <a href="../documentos/documento.pdf">Haz clic aquí para descargarlo.</a>
+                </p>
+            </object>
+        </div>
+    </div>
+
+    <!-- Flecha para ir al inicio de la página / Arrow to go to the top of the page -->
+    <a href="#" id="flecha-top" title="Ir al inicio de la página">
+        Arriba
+    </a>
+    <script>
+        //Flecha para ir al inicio de la página / Arrow to go to the top of the page
+        window.addEventListener('scroll', function () {
+            var flechaTop = document.getElementById('flecha-top');
+            if (window.pageYOffset > 100) {
+                flechaTop.classList.add('mostrar');
+            } else {
+                flechaTop.classList.remove('mostrar');
+            }
+        });
+
+        document.getElementById('flecha-top').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+
+</html>
